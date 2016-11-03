@@ -2033,12 +2033,12 @@ fieldset[disabled] .btn-xl.btn-bold.active {
   color: #ffffff;
 }
 .label-big {
-  font-size: 18px;
+  font-size: 16px;
   margin: 6px 4px;
 }
 @media (max-width: 767px) {
   .label-big {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 .highlight1 {
@@ -2310,6 +2310,15 @@ fieldset[disabled] .inverse .btn-xl:hover.active {
   .navbar-brand img {
     width: 150px;
   }
+  .scale-1 {
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    -ms-transform: scale(0.75);
+    -o-transform: scale(0.75);
+  }
+  .break-line {
+    display: none;
+  }
 }
 @media (min-width: 768px) {
   .navbar-default {
@@ -2376,44 +2385,69 @@ header .intro-text .intro-heading {
   font-weight: 700;
   font-size: 45px;
   line-height: 45px;
-  margin-bottom: 25px;
 }
 header .intro-text .intro-lead-out {
   font-size: 1.6em;
   font-size: 30px;
   line-height: 30px;
-  margin-bottom: 30px;
-  text-transform: uppercase;
+  padding: 20px 0;
+  text-transform: none;
   font-weight: 300;
 }
 header .intro-text .arrow-down {
-  margin-top: 25px;
+  margin-top: 15px;
   color: #ffffff;
 }
 header .intro-text .arrow-down:hover {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
 }
+header .intro-text .btn-xl.btn-bold {
+  margin: 25px 0;
+}
+header .intro-text .intro-logos {
+  margin: 20px 0 0;
+}
+header .intro-text .intro-logos h4 {
+  font-weight: 100;
+  margin-top: 80px;
+  text-transform: uppercase;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+  opacity: .7;
+}
+header .intro-text .intro-logos img {
+  display: inline-block;
+  max-width: 220px;
+  opacity: .85;
+}
 @media (max-width: 767px) {
   header .intro-text {
     padding-top: 70px;
   }
   header .intro-text .intro-heading {
-    -webkit-transform: scale(0.85);
-    -moz-transform: scale(0.85);
-    -ms-transform: scale(0.85);
-    -o-transform: scale(0.85);
     margin-bottom: 10px;
   }
   header .intro-text .intro-lead-out {
     font-size: 22px;
     line-height: 27px;
+    padding: 0 0 20px;
+  }
+  header .intro-text .intro-logos h4 {
+    font-weight: 100;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+  }
+  header .intro-text .intro-logos img {
+    max-width: 170px;
   }
 }
 @media (min-width: 768px) {
   header .intro-text {
     padding-top: 300px;
-    padding-bottom: 100px;
+    padding-bottom: 20px;
   }
   header .intro-text .intro-lead-in {
     font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2423,18 +2457,27 @@ header .intro-text .arrow-down:hover {
   header .intro-text .intro-lead-out {
     font-size: 40px;
     line-height: 30px;
-    margin-bottom: 50px;
   }
   header .intro-text .intro-heading {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 75px;
-    line-height: 65px;
-    margin-bottom: 40px;
+    font-size: 70px;
+    line-height: 70px;
+    padding-bottom: 20px;
+    letter-spacing: 0.015em;
   }
   header .intro-text .arrow-down {
-    margin-top: 50px;
+    margin-top: 20px;
+    color: #ffffff;
+  }
+  header .intro-text .intro-logos {
+    margin: 40px 0 0;
+  }
+  header .intro-text .intro-logos img {
+    display: inline-block;
+    max-width: 220px;
+    opacity: .85;
   }
 }
 @media (min-width: 768px) and (max-width: 1366px) {
@@ -2442,6 +2485,13 @@ header .intro-text .arrow-down:hover {
     padding-top: 200px;
     padding-left: 50px;
     padding-right: 50px;
+  }
+  header .intro-text .arrow-down {
+    margin-top: 0;
+  }
+  header .intro-text .intro-logos img {
+    max-width: 180px;
+    opacity: .85;
   }
 }
 section {
@@ -2451,7 +2501,7 @@ section h2.section-heading {
   font-size: 45px;
   margin-top: 0;
   margin-bottom: 15px;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
 }
 section h3.section-subheading {
   font-size: 18px;
@@ -2465,7 +2515,7 @@ section h3.section-subheading {
   margin-right: auto;
 }
 section h3.section-subheading.talk {
-  margin-bottom: 50px;
+  margin: 0 auto;
 }
 .hr {
   clear: both;
@@ -2803,6 +2853,7 @@ section h3.section-subheading.talk {
   margin: 0 auto;
   text-align: left;
   clear: both;
+  max-width: 460px;
 }
 #community .community-item .community-caption .community-text {
   padding: 20px;
