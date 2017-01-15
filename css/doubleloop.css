@@ -2658,6 +2658,11 @@ section h2.section-heading {
   margin-bottom: 15px;
   letter-spacing: -0.025em;
 }
+@media (max-width: 767px) {
+  section h2.section-heading {
+    font-size: 36px;
+  }
+}
 section h3.section-subheading {
   font-size: 18px;
   font-family: "Bitter", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2731,10 +2736,15 @@ section h3.section-subheading.talk {
   height: 100%;
   color: #babac0;
   text-transform: none;
-  font-size: 2.2em;
+  font-size: 2em;
+  line-height: 1.3em;
   height: 300px;
   padding-left: 60px;
   letter-spacing: 0;
+  font-weight: normal;
+}
+.manifesto .section-quote strong {
+  font-weight: normal;
 }
 .manifesto .section-quote:before {
   content: url(../img/bracket.svg);
