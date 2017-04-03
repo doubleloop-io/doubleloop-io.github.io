@@ -1053,6 +1053,271 @@ var cbpAnimatedHeader=(function(){var b=document.documentElement,g=document.quer
   };
 
 })( jQuery );
+;
+(function(jQuery){
+
+
+	jQuery.cookieLaw = {
+
+		name: "jquery.mb.YTPlayer",
+		version: "1.0",
+		author: "Matteo Bicocchi",
+
+		defaults: {
+			cookieText: "We are using cookies to give you the best experience on our site. Cookies are files stored in your browser and are used by most websites to help personalise your web experience. By continuing to use our website without changing the settings, you are agreeing to our use of cookies.",
+			position  : "bottom",
+			bgColor   : "#000000", //default black
+			txtColor  : "#FFFFFF", //default white
+			fFamily   : "Helvetica, Arial, sans-serif", //default font family
+			fSize     : 16, //default font size
+
+			buttonText    : "Got it!",
+			buttonColor   : "#F1D600",
+			buttonTxtColor: "#000000",
+
+			readMoreText: "Read more",
+			readMoreLink: "#",
+			readMoreColor: "#F1D600",
+
+			scrollToAccept: false,
+
+			reminder: true, //add a litle tab on the bottom or on the top to show the box again
+			reminderText: "Cookie law"
+
+		},
+
+		init: function(opt){
+
+			jQuery.cookieLaw.opt = jQuery.extend({}, jQuery.cookieLaw.defaults, opt );
+
+			/* Box */
+			jQuery.cookieLaw.box = jQuery("<div/>").addClass("cookieLaw-box");
+
+			var isSmall = jQuery(window).width() < 750;
+
+			if(!isSmall)
+				jQuery.cookieLaw.box.css({
+					position            : "fixed",
+					width               : "100%",
+					left                : 0,
+					padding             : 30,
+					"-webkit-box-sizing": "border-box",
+					boxSizing           : "border-box",
+					backgroundColor     : jQuery.cookieLaw.opt.bgColor,
+					color               : jQuery.cookieLaw.opt.txtColor,
+					fontFamily          : jQuery.cookieLaw.opt.fFamily,
+					fontSize            : jQuery.cookieLaw.opt.fSize,
+					paddingRight         : 150,
+					display             : "none"
+				});
+
+			else
+
+				jQuery.cookieLaw.box.css({
+					position            : "fixed",
+					width               : "100%",
+					left                : 0,
+					padding             : 10,
+					"-webkit-box-sizing": "border-box",
+					boxSizing           : "border-box",
+					backgroundColor     : jQuery.cookieLaw.opt.bgColor,
+					color               : jQuery.cookieLaw.opt.txtColor,
+					fontFamily          : jQuery.cookieLaw.opt.fFamily,
+					fontSize            : jQuery.cookieLaw.opt.fSize - 4,
+					display             : "none"
+				});
+
+			if(jQuery.cookieLaw.opt.position == "top")
+				jQuery.cookieLaw.box.css("top", 0);
+			else
+				jQuery.cookieLaw.box.css("bottom", 0);
+
+			jQuery.cookieLaw.textContainer = jQuery("<div/>").addClass("cookieLaw-text-container");
+			jQuery.cookieLaw.textContainer.html(jQuery.cookieLaw.opt.cookieText);
+
+			if(jQuery.cookieLaw.opt.readMoreText){
+				var readMore = jQuery("<a/>").html(jQuery.cookieLaw.opt.readMoreText);
+				readMore.attr({
+							href  : jQuery.cookieLaw.opt.readMoreLink,
+							target: "_blank"
+						}
+				);
+
+				readMore.css({
+					color         : jQuery.cookieLaw.opt.readMoreColor,
+					padding       : 10,
+					textDecoration: "none"
+				});
+
+				jQuery.cookieLaw.textContainer.append(readMore);
+
+			}
+
+			jQuery.cookieLaw.box.append(jQuery.cookieLaw.textContainer);
+
+			/* Accept */
+			jQuery.cookieLaw.button = jQuery("<button/>").html(jQuery.cookieLaw.opt.buttonText);
+
+			if(!isSmall)
+				jQuery.cookieLaw.button.css({
+					position       : "absolute",
+					right          : 10,
+					cursor         : "pointer",
+					top            : 0,
+					bottom         : 0,
+					fontSize       : jQuery.cookieLaw.opt.fSize,
+					backgroundColor: jQuery.cookieLaw.opt.buttonColor,
+					border         : "none",
+					margin         : "auto",
+					height         : 40,
+					padding        : 10,
+					color          : jQuery.cookieLaw.opt.buttonTxtColor
+				});
+
+			else
+				jQuery.cookieLaw.button.css({
+					position       : "relative",
+					cursor         : "pointer",
+					fontSize       : jQuery.cookieLaw.opt.fSize,
+					backgroundColor: jQuery.cookieLaw.opt.buttonColor,
+					border         : "none",
+					height         : 40,
+					padding        : 10,
+					color          : jQuery.cookieLaw.opt.buttonTxtColor,
+					float          : "right"
+				});
+
+			jQuery.cookieLaw.button.bind("click", function(){
+				jQuery.cookieLaw.close();
+			});
+
+			if(jQuery.cookieLaw.opt.scrollToAccept){
+				jQuery(window).bind("scroll", function(){
+
+					if(jQuery("body").scrollTop() > 100){
+						jQuery.cookieLaw.close();
+					}
+
+				})
+			}
+
+			jQuery.cookieLaw.box.append(jQuery.cookieLaw.button);
+			jQuery("body").append(jQuery.cookieLaw.box);
+
+			jQuery.cookieLaw.box.mb_bringToFront();
+
+			jQuery.cookieLaw.reminder = jQuery("<div/>").addClass("cookieLaw-reminder");
+			jQuery.cookieLaw.reminder.html(jQuery.cookieLaw.opt.reminderText);
+
+			jQuery.cookieLaw.reminder.css({
+				position           : "fixed",
+				width              : "auto",
+				right              : 0,
+				padding            : 5,
+				backgroundColor    : jQuery.cookieLaw.opt.bgColor,
+				color              : jQuery.cookieLaw.opt.txtColor,
+				fontFamily         : jQuery.cookieLaw.opt.fFamily,
+				fontSize           : 10,
+				cursor             : "pointer",
+				display            : "none"
+			});
+
+			if(jQuery.cookieLaw.opt.position == "top")
+				jQuery.cookieLaw.reminder.css({
+					top: 0,
+					borderBottomLeftRadius: 10
+				});
+			else
+				jQuery.cookieLaw.reminder.css({
+					bottom: 0,
+					borderTopLeftRadius: 10
+				});
+
+			if(jQuery.cookieLaw.opt.reminder){
+				jQuery("body").append(jQuery.cookieLaw.reminder);
+				jQuery.cookieLaw.reminder.mb_bringToFront();
+
+				jQuery.cookieLaw.reminder.bind("click", function(){
+					jQuery.cookieLaw.box.slideDown(300);
+					jQuery.cookieLaw.reminder.hide();
+				});
+			};
+
+			jQuery.cookieLaw.reminder.mb_bringToFront();
+
+			if(jQuery.mbCookie.get("mbcookieLaw_dismissed")){
+				if(jQuery.cookieLaw.opt.reminder){
+					setTimeout(function(){
+						jQuery.cookieLaw.reminder.slideDown(300);
+					}, 1000);
+				}
+			} else {
+
+				setTimeout(function(){
+					jQuery.cookieLaw.box.slideDown(300);
+				}, 1000);
+			}
+
+		},
+
+		accept: function(){
+
+			jQuery.mbCookie.set("mbcookieLaw_dismissed", new Date().getTime());
+
+		},
+
+		close: function(){
+			jQuery.cookieLaw.accept();
+			jQuery.cookieLaw.box.slideUp(300);
+
+			if(jQuery.cookieLaw.opt.reminder){
+				jQuery.cookieLaw.reminder.slideDown();
+			}
+		}
+	};
+
+	/*COOKIES
+	 * -----------------------------------------------------------------*/
+	jQuery.mbCookie = {
+		set: function(name,value,days, domain) {
+			if (!days) days=7;
+			domain= domain ?  "; domain="+domain : "";
+			var date = new Date(), expires;
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			expires = "; expires="+date.toGMTString();
+			document.cookie = name + "="+value+expires+"; path=/" + domain;
+		},
+		get: function(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		},
+		remove: function(name) {
+			jQuery.mbCookie.set(name,"",-1);
+		}
+	};
+	/*-----------------------------------------------------------------*/
+
+	jQuery.fn.mb_bringToFront= function(el){
+		if (!el) el="*";
+		var zi=0;
+		jQuery(el).each(function() {
+			var position= "absolute" || "relative" || "fixed";
+			if(jQuery(this).css("position")==position){
+				var cur = parseInt(jQuery(this).css('zIndex'));
+				zi = cur > zi ? parseInt(jQuery(this).css('zIndex')) : zi;
+			}
+		});
+		jQuery(this).css('zIndex',zi+=1);
+		return jQuery(this);
+	};
+
+})(jQuery);
 ;/*!
  * Start Bootstrap - Doubleloop Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
@@ -1105,3 +1370,43 @@ jQuery( document ).ready( function( $ ) {
 	} );
 
 } );
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-65828996-1', 'auto');
+ga('send', 'pageview');
+
+
+
+jQuery('#team').find('a[href^="http"]').attr('target', 'blank')
+
+
+$(function(){
+
+    $.cookieLaw.init({
+      cookieText: "We are using cookies to give you the best experience on our site. Cookies are files stored in your browser and are used by most websites to help personalise your web experience.<br>By continuing to use our website without changing the settings, you are agreeing to our use of cookies.",
+      position  : "bottom",//or top
+      bgColor   : "#000000", //default black
+      txtColor  : "#FFFFFF", //default white
+      fFamily   : "Helvetica, Arial, sans-serif", //default font family
+      fSize     : 16, //default font size
+
+      buttonText    : "Got it!",
+      buttonColor   : "#F1D600",
+      buttonTxtColor: "#000000",
+
+      readMoreText: "Read more",
+      readMoreLink: "generic-cookie-privacy-en.html",
+      readMoreColor: "#F1D600",
+
+      scrollToAccept: false,
+
+      reminder: true, //add a little tab on the bottom or on the top to show the box again
+      reminderText: "Cookie law"
+    });
+    });
+
+
