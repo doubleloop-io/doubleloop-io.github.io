@@ -2751,6 +2751,13 @@ section h3.section-subheading.talk {
     padding: 60px 0;
   }
 }
+.endorsement {
+  color: #66cc66;
+}
+.endorsement .endorsement-author {
+  color: #3c4055;
+  display: block;
+}
 .page.services header {
   background-image: url(../img/header-bg-services.jpg);
 }
