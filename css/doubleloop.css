@@ -3088,15 +3088,20 @@ section h3.section-subheading.talk {
   .team-member .team-content {
     padding: 0 20px 0 0;
     background: #e5e5e5;
-    height: 300px;
+    height: 430px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 998px) {
+  .team-member .team-content {
+    height: 350px;
+  }
+}
+@media (min-width: 1025px) {
   .team-member .team-img {
     width: 250px;
   }
   .team-member .team-content {
-    height: 250px;
+    height: 280px;
   }
 }
 .team-member.left {
